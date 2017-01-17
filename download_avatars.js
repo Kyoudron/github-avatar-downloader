@@ -1,5 +1,5 @@
 var request = require('request');
-// var fs = require('fs');
+var fs = require('fs');
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
@@ -22,6 +22,12 @@ request(options, function(error, response, body){
     }
   })
 }
+
+function downloadImageByURL(url, filePath) {
+  // .pipe(fs.createWriteStream(filePath));
+}
+
+downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg")
 
 
 
