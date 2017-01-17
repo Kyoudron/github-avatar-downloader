@@ -12,33 +12,27 @@ function getRepoContributors(repoOwner, repoName, cb) {
     url: "https://" + GITHUB_USER + ":" + GITHUB_TOKEN + "@api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     headers: {
       'User-Agent': "Github Avatar Downloader - Student Project"
-  }
-}
-
-request(options, function(error, response, body){
-  var parseBody = (JSON.parse(body))
-    for (i = 0; i < parseBody.length; i++) {
-      console.log(parseBody[i].avatar_url)
     }
-  })
+  }
+
+
+  request(options, function(error, response, body) {
+    let parsedBody = JSON.parse(body)
+      parsedBody.forEach((user) => {
+        downloadImageByURL(user.avatar_url, user.login)
+      })
+    })
 }
 
-function downloadImageByURL(url, filePath) {
-  // .pipe(fs.createWriteStream(filePath));
-}
 
-downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg")
-
-
-
-  // request.get('https://github.com/nodejs/node')
-  // .on('response', function(response){
-  //   console.log("working", response)
-// }
 
 getRepoContributors("jquery", "jquery", function(err, result) {
-  console.log("Errors:", err);
-  console.log("Result:", result);
-});
+  console.log("Errors:", err)
+  console.log("Result:", result)
+})
 
 
+function downloadImageByURL(url, login) {
+  request.get(url)
+    .pipe(fs.createWriteStream(`avatars/${login}.jpg`))
+}
