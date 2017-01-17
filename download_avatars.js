@@ -18,19 +18,17 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   }
 
-
-
 request(options, function(error, response, body) {
-  let parsedBody = JSON.parse(body)
+  var parsedBody = JSON.parse(body);
       parsedBody.forEach((user) => {
-        downloadImageByURL(user.avatar_url, user.login)
+        downloadImageByURL(user.avatar_url, user.login);
     })
   })
 }
 
 
 if (args.length !== 2) {
-  console.log("Error: Need 'Owner' and 'Name'")
+  console.log("Error: You did not provide the Owner and Name.")
   } else {
     getRepoContributors(args[0], args[1], function(err, result) {
     console.log("Errors:", err)
