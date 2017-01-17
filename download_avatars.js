@@ -1,3 +1,7 @@
+var args = process.argv.slice(2);
+
+
+
 var request = require('request');
 var fs = require('fs');
 
@@ -26,7 +30,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(args[0], args[1], function(err, result) {
   console.log("Errors:", err)
   console.log("Result:", result)
 })
